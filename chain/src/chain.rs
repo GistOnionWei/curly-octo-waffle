@@ -1,4 +1,5 @@
 // Copyright 2018 The Grin Developers
+// Copyright 2019 The Libercoin Developers
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,7 +35,7 @@ use crate::types::{
 };
 use crate::util::secp::pedersen::{Commitment, RangeProof};
 use crate::util::RwLock;
-use grin_store::Error::NotFoundErr;
+use libercoin_store::Error::NotFoundErr;
 use std::collections::HashMap;
 use std::fs::{self, File};
 use std::io::Read;
@@ -863,8 +864,8 @@ impl Chain {
 	}
 
 	/// Specific tmp dir.
-	/// Normally it's ~/.grin/main/tmp for mainnet
-	/// or ~/.grin/floo/tmp for floonet
+	/// Normally it's ~/.libercoin/main/tmp for mainnet
+	/// or ~/.libercoin/floo/tmp for floonet
 	pub fn get_tmp_dir(&self) -> PathBuf {
 		let mut tmp_dir = PathBuf::from(self.db_root.clone());
 		tmp_dir = tmp_dir
@@ -914,7 +915,7 @@ impl Chain {
 
 		let header = self.get_block_header(&h)?;
 
-		// Write txhashset to sandbox (in the Grin specific tmp dir)
+		// Write txhashset to sandbox (in the Libercoin specific tmp dir)
 		let sandbox_dir = self.get_tmp_dir();
 		txhashset::clean_txhashset_folder(&sandbox_dir);
 		txhashset::clean_header_folder(&sandbox_dir);

@@ -1,4 +1,5 @@
 // Copyright 2018 The Grin Developers
+// Copyright 2019 The Libercoin Developers
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,7 +32,7 @@ use crate::core::global;
 use crate::core::pow::Difficulty;
 use crate::core::ser::{self, Readable, Reader, Writeable, Writer};
 use crate::msg::ProtocolVersion;
-use grin_store;
+use libercoin_store;
 
 /// Maximum number of block headers a peer should ever send
 pub const MAX_BLOCK_HEADERS: u32 = 512;
@@ -65,7 +66,7 @@ pub enum Error {
 	Banned,
 	ConnectionClose,
 	Timeout,
-	Store(grin_store::Error),
+	Store(libercoin_store::Error),
 	Chain(chain::Error),
 	PeerWithSelf,
 	NoDandelionRelay,
@@ -83,8 +84,8 @@ impl From<ser::Error> for Error {
 		Error::Serialization(e)
 	}
 }
-impl From<grin_store::Error> for Error {
-	fn from(e: grin_store::Error) -> Error {
+impl From<libercoin_store::Error> for Error {
+	fn from(e: libercoin_store::Error) -> Error {
 		Error::Store(e)
 	}
 }
@@ -259,7 +260,7 @@ impl Default for P2PConfig {
 }
 
 /// Note certain fields are options just so they don't have to be
-/// included in grin-server.toml, but we don't want them to ever return none
+/// included in libercoin-server.toml, but we don't want them to ever return none
 impl P2PConfig {
 	/// return ban window
 	pub fn ban_window(&self) -> i64 {
@@ -564,7 +565,7 @@ pub trait ChainAdapter: Sync + Send {
 		peer_peer_info: &PeerInfo,
 	) -> Result<bool, chain::Error>;
 
-	/// Get the Grin specific tmp dir
+	/// Get the Libercoin specific tmp dir
 	fn get_tmp_dir(&self) -> PathBuf;
 
 	/// Get a tmp file path in above specific tmp dir (create tmp dir if not exist)

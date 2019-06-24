@@ -1,4 +1,5 @@
 // Copyright 2018 The Grin Developers
+// Copyright 2019 The Libercoin Developers
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,8 +21,8 @@ use hyper::{Body, Request, Response, StatusCode};
 use ring::constant_time::verify_slices_are_equal;
 
 lazy_static! {
-	pub static ref GRIN_BASIC_REALM: HeaderValue =
-		HeaderValue::from_str("Basic realm=GrinAPI").unwrap();
+	pub static ref LIBERCOIN_BASIC_REALM: HeaderValue =
+		HeaderValue::from_str("Basic realm=LibercoinAPI").unwrap();
 }
 
 // Basic Authentication Middleware

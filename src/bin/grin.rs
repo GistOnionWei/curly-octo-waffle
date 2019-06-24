@@ -1,4 +1,5 @@
 // Copyright 2018 The Grin Developers
+// Copyright 2019 The Libercoin Developers
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! Main for building the binary of a Grin peer-to-peer node.
+//! Main for building the binary of a Libercoin peer-to-peer node.
 
 #[macro_use]
 extern crate clap;
@@ -23,12 +24,12 @@ use crate::config::config::SERVER_CONFIG_FILE_NAME;
 use crate::core::global;
 use crate::util::init_logger;
 use clap::App;
-use grin_api as api;
-use grin_config as config;
-use grin_core as core;
-use grin_p2p as p2p;
-use grin_servers as servers;
-use grin_util as util;
+use libercoin_api as api;
+use libercoin_config as config;
+use libercoin_core as core;
+use libercoin_p2p as p2p;
+use libercoin_servers as servers;
+use libercoin_util as util;
 
 mod cmd;
 pub mod tui;
@@ -41,7 +42,7 @@ pub mod built_info {
 pub fn info_strings() -> (String, String) {
 	(
 		format!(
-			"This is Grin version {}{}, built for {} by {}.",
+			"This is Libercoin version {}{}, built for {} by {}.",
 			built_info::PKG_VERSION,
 			built_info::GIT_VERSION.map_or_else(|| "".to_owned(), |v| format!(" (git {})", v)),
 			built_info::TARGET,
@@ -69,7 +70,7 @@ fn main() {
 }
 
 fn real_main() -> i32 {
-	let yml = load_yaml!("grin.yml");
+	let yml = load_yaml!("libercoin.yml");
 	let args = App::from_yaml(yml).get_matches();
 	let node_config;
 
@@ -79,7 +80,7 @@ fn real_main() -> i32 {
 			println!();
 			println!("As of v1.1.0, the wallet has been split into a seperate executable.");
 			println!(
-				"Please visit https://github.com/mimblewimble/grin-wallet/releases to download"
+				"Please visit https://github.com/mimblewimble/libercoin-wallet/releases to download"
 			);
 			println!();
 			return 0;
