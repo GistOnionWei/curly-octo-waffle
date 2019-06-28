@@ -1,4 +1,5 @@
 // Copyright 2018 The Grin Developers
+// Copyright 2019 The Libercoin Developers
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -46,7 +47,7 @@ impl ExtKeychain {
 
 impl Keychain for ExtKeychain {
 	fn from_seed(seed: &[u8], is_floo: bool) -> Result<ExtKeychain, Error> {
-		let mut h = BIP32GrinHasher::new(is_floo);
+		let mut h = BIP32LibercoinHasher::new(is_floo);
 		let secp = secp::Secp256k1::with_caps(secp::ContextFlag::Commit);
 		let master = ExtendedPrivKey::new_master(&secp, &mut h, seed)?;
 		let keychain = ExtKeychain {
@@ -59,7 +60,7 @@ impl Keychain for ExtKeychain {
 
 	fn from_mnemonic(word_list: &str, extension_word: &str, is_floo: bool) -> Result<Self, Error> {
 		let secp = secp::Secp256k1::with_caps(secp::ContextFlag::Commit);
-		let h = BIP32GrinHasher::new(is_floo);
+		let h = BIP32LibercoinHasher::new(is_floo);
 		let master = ExtendedPrivKey::from_mnemonic(&secp, word_list, extension_word, is_floo)?;
 		let keychain = ExtKeychain {
 			secp: secp,
