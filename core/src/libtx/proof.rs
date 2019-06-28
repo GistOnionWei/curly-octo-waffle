@@ -442,7 +442,7 @@ impl ProofBuild for ViewKey {
 mod tests {
 	use super::*;
 	use crate::keychain::ExtKeychain;
-	use grin_keychain::ChildNumber;
+	use libercoin_keychain::ChildNumber;
 	use rand::{thread_rng, Rng};
 
 	#[test]
