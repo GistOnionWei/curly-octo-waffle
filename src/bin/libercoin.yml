@@ -14,8 +14,8 @@ args:
       takes_value: false
 subcommands:
   - wallet:
-      about: As of v1.1.0, the wallet has been split into a separate executable. See https://github.com/mimblewimble/libercoin-wallet/releases
-      usage: As of v1.1.0, the wallet has been split into a separate executable. See https://github.com/mimblewimble/libercoin-wallet/releases to download
+      about: As of v1.1.0, the wallet has been split into a separate executable. See https://github.com/libercoinproject/libercoin-wallet/releases
+      usage: As of v1.1.0, the wallet has been split into a separate executable. See https://github.com/libercoinproject/libercoin-wallet/releases to download
   - server:
       about: Control the Libercoin server
       args:

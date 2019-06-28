@@ -533,4 +533,4 @@ Libercoin Stratum protocole 구현체는 다음과 같은 에러 메시지를 �
 
 ## Reference Implementation
 
-현재 구현체는 [mimblewimble/libercoin-miner](https://github.com/mimblewimble/libercoin-miner/blob/master/src/bin/client.rs) 에서 참고하세요.
+현재 구현체는 [libercoinproject/libercoin-miner](https://github.com/libercoinproject/libercoin-miner/blob/master/src/bin/client.rs) 에서 참고하세요.

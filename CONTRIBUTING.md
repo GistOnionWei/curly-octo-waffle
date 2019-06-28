@@ -2,7 +2,7 @@
 
 Find an area you can help with and do it. Open source is about collaboration and open participation. Try to make your code look like what already exists and submit a pull request.
 
-The [list of issues](https://github.com/mimblewimble/libercoin/issues) is a good place to start, especially the ones tagged as "help wanted" (but don't let that stop you from looking at others). If you're looking for additional ideas, the code includes `TODO` comments for minor to major improvements. Use _Search in files_ in your code editor, or `grep "TODO" -r --exclude-dir=target --exclude-dir=.git .`.
+The [list of issues](https://github.com/libercoinproject/libercoin/issues) is a good place to start, especially the ones tagged as "help wanted" (but don't let that stop you from looking at others). If you're looking for additional ideas, the code includes `TODO` comments for minor to major improvements. Use _Search in files_ in your code editor, or `grep "TODO" -r --exclude-dir=target --exclude-dir=.git .`.
 
 Additional tests are rewarded with an immense amount of positive karma.
 
@@ -34,7 +34,7 @@ In case of problems with trying out libercoin, before starting to contribute, th
 * And [see the developers chat](https://gitter.im/libercoin_community/dev) if you have questions about source code files.
   If you explain what you're looking at and what you want to do, we'll try to help you along the way.
 * Also see `docs/*.md` and the folder structure explanations, and [the wiki](https://github.com/mimblewimble/docs/wiki).
-* Further information and discussions are in the [Forum](https://www.libercoin-forum.org/), the [website](https://libercoin-tech.org), the [mailing list](https://lists.launchpad.net/mimblewimble/) and news channels like the [@libercoincouncil](https://twitter.com/libercoincouncil) and a (mostly unfiltered!) Twitter bot that collects headlines, mailing list posts, and reddit posts related to MimbleWimble/Libercoin: [@libercoinmw](https://twitter.com/libercoinmw)
+* Further information and discussions are in the [Forum](https://www.libercoin-forum.org/), the [website](https://libercoin-tech.org), the [mailing list](https://lists.launchpad.net/mimblewimble/) and news channels like the [@libercoincouncil](https://twitter.com/libercoincouncil) and a (mostly unfiltered!) Twitter bot that collects headlines, mailing list posts, and reddit posts related to libercoinproject/libercoin: [@libercoinmw](https://twitter.com/libercoinmw)
 
 ## Testing
 

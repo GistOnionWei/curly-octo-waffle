@@ -5,7 +5,7 @@ edition = "2018"
 authors = ["Grin Developers <mimblewimble@lists.launchpad.net>"]
 description = "Utility to automate the generation of Libercoin's genesis block"
 license = "Apache-2.0"
-repository = "https://github.com/mimblewimble/libercoin"
+repository = "https://github.com/libercoinproject/libercoin"
 keywords = [ "crypto", "libercoin", "mimblewimble" ]
 readme = "README.md"
 

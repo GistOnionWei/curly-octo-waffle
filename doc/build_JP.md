@@ -41,7 +41,7 @@ brew install openssl
 ## ビルド手順
 
 ```sh
-git clone https://github.com/mimblewimble/libercoin.git
+git clone https://github.com/libercoinproject/libercoin.git
 cd libercoin
 cargo build --release
 ```
@@ -124,6 +124,6 @@ x86のLinux上で`libercoin`をクロスコンパイルしARMバイナリを作�
 
 ## libercoinのマイニング
 
-libercoinのマイニングに関する全ての機能は[libercoin-miner](https://github.com/mimblewimble/libercoin-miner)と呼ばれるスタンドアローンなパッケージに分離されていることに注意。
+libercoinのマイニングに関する全ての機能は[libercoin-miner](https://github.com/libercoinproject/libercoin-miner)と呼ばれるスタンドアローンなパッケージに分離されていることに注意。
 
 libercoin-minerをlibercoinノードと通信させるためには、`libercoin-server.toml`の設定ファイルで`enable_stratum_server = true`と設定し、ウォレットリスナーを起動(`libercoin wallet listen`)しておく必要がある。

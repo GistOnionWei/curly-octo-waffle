@@ -42,7 +42,7 @@ brew install openssl
 ## Build steps
 
 ```sh
-git clone https://github.com/mimblewimble/libercoin.git
+git clone https://github.com/libercoinproject/libercoin.git
 cd libercoin
 cargo build --release
 ```
@@ -133,7 +133,7 @@ troubleshooting, etc.
 ## Mining in Libercoin
 
 Please note that all mining functions for Libercoin have moved into a separate, standalone package called
-[libercoin-miner](https://github.com/mimblewimble/libercoin-miner). Once your Libercoin code node is up and running,
+[libercoin-miner](https://github.com/libercoinproject/libercoin-miner). Once your Libercoin code node is up and running,
 you can start mining by building and running libercoin-miner against your running Libercoin node.
 
 For libercoin-miner to be able to communicate with your libercoin node, make sure that you have `enable_stratum_server = true`

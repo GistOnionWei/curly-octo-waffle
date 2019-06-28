@@ -536,4 +536,4 @@ Miners SHOULD, MAY or MUST respect the following rules:
 
 ## Reference Implementation
 
-The current reference implementation is available at [mimblewimble/libercoin-miner](https://github.com/mimblewimble/libercoin-miner/blob/master/src/bin/client.rs).
+The current reference implementation is available at [libercoinproject/libercoin-miner](https://github.com/libercoinproject/libercoin-miner/blob/master/src/bin/client.rs).

@@ -40,7 +40,7 @@ brew install openssl
 ## Pasos para la compilación
 
 ```sh
-git clone https://github.com/mimblewimble/libercoin.git
+git clone https://github.com/libercoinproject/libercoin.git
 cd libercoin
 cargo build --release
 ```
@@ -112,4 +112,4 @@ La página de la wiki [Cómo usar libercoin](https://github.com/mimblewimble/doc
 
 ## Minando en Libercoin
 
-Tenga en cuenta que todas las funciones de minería de Libercoin se han trasladado a un paquete independiente llamado [libercoin_minner](https://github.com/mimblewimble/libercoin-miner). Una vez que el nodo de libercoin esté listo y funcionando, puede empezar a minar compilando y ejecutando libercoin-miner con su nodo Libercoin en funcionamiento.
+Tenga en cuenta que todas las funciones de minería de Libercoin se han trasladado a un paquete independiente llamado [libercoin_minner](https://github.com/libercoinproject/libercoin-miner). Una vez que el nodo de libercoin esté listo y funcionando, puede empezar a minar compilando y ejecutando libercoin-miner con su nodo Libercoin en funcionamiento.
