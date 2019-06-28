@@ -1,7 +1,7 @@
 [package]
 name = "libercoin_config"
-version = "1.1.1-beta.1"
-authors = ["Grin Developers <mimblewimble@lists.launchpad.net>"]
+version = "2.0.0-beta.2"
+authors = ["libercoin Developers <mimblewimble@lists.launchpad.net>"]
 description = "Configuration for libercoin, a simple, private and scalable cryptocurrency implementation based on the MimbleWimble chain format."
 license = "Apache-2.0"
 repository = "https://github.com/mimblewimble/libercoin"
@@ -16,10 +16,10 @@ serde_derive = "1"
 toml = "0.4"
 dirs = "1.0.3"
 
-libercoin_core = { path = "../core", version = "1.1.1-beta.1" }
-libercoin_servers = { path = "../servers", version = "1.1.1-beta.1" }
-libercoin_p2p = { path = "../p2p", version = "1.1.1-beta.1" }
-libercoin_util = { path = "../util", version = "1.1.1-beta.1" }
+libercoin_core = { path = "../core", version = "2.0.0-beta.2" }
+libercoin_servers = { path = "../servers", version = "2.0.0-beta.2" }
+libercoin_p2p = { path = "../p2p", version = "2.0.0-beta.2" }
+libercoin_util = { path = "../util", version = "2.0.0-beta.2" }
 
 [dev-dependencies]
 pretty_assertions = "0.5.1"

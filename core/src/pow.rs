@@ -34,8 +34,9 @@ use num;
 
 #[macro_use]
 mod common;
-pub mod cuckaroo;
 pub mod cuckatoo;
+pub mod cuckaroo;
+pub mod cuckarood;
 mod error;
 #[allow(dead_code)]
 pub mod lean;
@@ -49,8 +50,9 @@ use chrono::prelude::{DateTime, NaiveDateTime, Utc};
 
 pub use self::common::EdgeType;
 pub use self::types::*;
-pub use crate::pow::cuckaroo::{new_cuckaroo_ctx, CuckarooContext};
 pub use crate::pow::cuckatoo::{new_cuckatoo_ctx, CuckatooContext};
+pub use crate::pow::cuckaroo::{new_cuckaroo_ctx, CuckarooContext};
+pub use crate::pow::cuckarood::{new_cuckarood_ctx, CuckaroodContext};
 pub use crate::pow::error::Error;
 
 const MAX_SOLS: u32 = 10;

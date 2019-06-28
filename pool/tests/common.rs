@@ -196,7 +196,7 @@ where
 
 	tx_elements.push(libtx::build::with_fee(fees as u64));
 
-	libtx::build::transaction(tx_elements, keychain).unwrap()
+	libtx::build::transaction(tx_elements, keychain, &libtx::ProofBuilder::new(keychain)).unwrap()
 }
 
 pub fn test_transaction<K>(
@@ -226,7 +226,7 @@ where
 	}
 	tx_elements.push(libtx::build::with_fee(fees as u64));
 
-	libtx::build::transaction(tx_elements, keychain).unwrap()
+	libtx::build::transaction(tx_elements, keychain, &libtx::ProofBuilder::new(keychain)).unwrap()
 }
 
 pub fn test_source() -> TxSource {
