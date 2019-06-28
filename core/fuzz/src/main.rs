@@ -1,8 +1,8 @@
-extern crate grin_core;
-extern crate grin_keychain;
+extern crate libercoin_core;
+extern crate libercoin_keychain;
 
-use grin_core::core::{Block, CompactBlock, Transaction};
-use grin_core::ser;
+use libercoin_core::core::{Block, CompactBlock, Transaction};
+use libercoin_core::ser;
 use std::fs::{self, File};
 use std::path::Path;
 

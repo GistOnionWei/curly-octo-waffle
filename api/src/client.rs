@@ -1,4 +1,5 @@
 // Copyright 2018 The Grin Developers
+// Copyright 2019 The Libercoin Developers
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -137,14 +138,14 @@ fn build_request(
 	})?;
 	let mut builder = Request::builder();
 	if let Some(api_secret) = api_secret {
-		let basic_auth = format!("Basic {}", to_base64(&format!("grin:{}", api_secret)));
+		let basic_auth = format!("Basic {}", to_base64(&format!("libercoin:{}", api_secret)));
 		builder.header(AUTHORIZATION, basic_auth);
 	}
 
 	builder
 		.method(method)
 		.uri(uri)
-		.header(USER_AGENT, "grin-client")
+		.header(USER_AGENT, "libercoin-client")
 		.header(ACCEPT, "application/json")
 		.header(CONTENT_TYPE, "application/json")
 		.body(match body {

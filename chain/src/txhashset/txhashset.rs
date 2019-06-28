@@ -1,4 +1,5 @@
 // Copyright 2018 The Grin Developers
+// Copyright 2019 The Libercoin Developers
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -31,8 +32,8 @@ use crate::types::{Tip, TxHashSetRoots, TxHashsetWriteStatus};
 use crate::util::secp::pedersen::{Commitment, RangeProof};
 use crate::util::{file, secp_static, zip};
 use croaring::Bitmap;
-use grin_store;
-use grin_store::pmmr::{clean_files_by_prefix, PMMRBackend, PMMR_FILES};
+use libercoin_store;
+use libercoin_store::pmmr::{clean_files_by_prefix, PMMRBackend, PMMR_FILES};
 use std::collections::HashSet;
 use std::fs::{self, File};
 use std::path::{Path, PathBuf};
@@ -188,7 +189,7 @@ impl TxHashSet {
 					Err(ErrorKind::OutputNotFound.into())
 				}
 			}
-			Err(grin_store::Error::NotFoundErr(_)) => Err(ErrorKind::OutputNotFound.into()),
+			Err(libercoin_store::Error::NotFoundErr(_)) => Err(ErrorKind::OutputNotFound.into()),
 			Err(e) => Err(ErrorKind::StoreErr(e, format!("txhashset unspent check")).into()),
 		}
 	}
@@ -1432,10 +1433,10 @@ pub fn zip_read(root_dir: String, header: &BlockHeader) -> Result<File, Error> {
 	} else {
 		// clean up old zips.
 		// Theoretically, we only need clean-up those zip files older than STATE_SYNC_THRESHOLD.
-		// But practically, these zip files are not small ones, we just keep the zips in last one hour
+		// But practically, these zip files are not small ones, we just keep the zips in last 24 hours
 		let data_dir = Path::new(&root_dir);
 		let pattern = format!("{}_", TXHASHSET_ZIP);
-		if let Ok(n) = clean_files_by_prefix(data_dir.clone(), &pattern, 60 * 60) {
+		if let Ok(n) = clean_files_by_prefix(data_dir.clone(), &pattern, 24 * 60 * 60) {
 			debug!(
 				"{} zip files have been clean up in folder: {:?}",
 				n, data_dir

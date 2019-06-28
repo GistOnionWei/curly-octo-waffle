@@ -1,4 +1,5 @@
 // Copyright 2018 The Grin Developers
+// Copyright 2019 The Libercoin Developers
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,7 +35,7 @@ use crate::types::{
 };
 use crate::util::secp::pedersen::{Commitment, RangeProof};
 use crate::util::RwLock;
-use grin_store::Error::NotFoundErr;
+use libercoin_store::Error::NotFoundErr;
 use std::collections::HashMap;
 use std::fs::{self, File};
 use std::io::Read;
@@ -685,6 +686,27 @@ impl Chain {
 		))
 	}
 
+	/// To support the ability to download the txhashset from multiple peers in parallel,
+	/// the peers must all agree on the exact binary representation of the txhashset.
+	/// This means compacting and rewinding to the exact same header.
+	/// Since compaction is a heavy operation, peers can agree to compact every 12 hours,
+	/// and no longer support requesting arbitrary txhashsets.
+	/// Here we return the header of the txhashset we are currently offering to peers.
+	pub fn txhashset_archive_header(&self) -> Result<BlockHeader, Error> {
+		let sync_threshold = global::state_sync_threshold() as u64;
+		let body_head = self.head()?;
+		let archive_interval = global::txhashset_archive_interval();
+		let mut txhashset_height = body_head.height.saturating_sub(sync_threshold);
+		txhashset_height = txhashset_height.saturating_sub(txhashset_height % archive_interval);
+
+		debug!(
+			"txhashset_archive_header: body_head - {}, {}, txhashset height - {}",
+			body_head.last_block_h, body_head.height, txhashset_height,
+		);
+
+		self.get_header_by_height(txhashset_height)
+	}
+
 	// Special handling to make sure the whole kernel set matches each of its
 	// roots in each block header, without truncation. We go back header by
 	// header, rewind and check each root. This fixes a potential weakness in
@@ -842,8 +864,8 @@ impl Chain {
 	}
 
 	/// Specific tmp dir.
-	/// Normally it's ~/.grin/main/tmp for mainnet
-	/// or ~/.grin/floo/tmp for floonet
+	/// Normally it's ~/.libercoin/main/tmp for mainnet
+	/// or ~/.libercoin/floo/tmp for floonet
 	pub fn get_tmp_dir(&self) -> PathBuf {
 		let mut tmp_dir = PathBuf::from(self.db_root.clone());
 		tmp_dir = tmp_dir
@@ -893,7 +915,7 @@ impl Chain {
 
 		let header = self.get_block_header(&h)?;
 
-		// Write txhashset to sandbox (in the Grin specific tmp dir)
+		// Write txhashset to sandbox (in the Libercoin specific tmp dir)
 		let sandbox_dir = self.get_tmp_dir();
 		txhashset::clean_txhashset_folder(&sandbox_dir);
 		txhashset::clean_header_folder(&sandbox_dir);

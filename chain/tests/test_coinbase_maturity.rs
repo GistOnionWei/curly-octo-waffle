@@ -1,4 +1,5 @@
 // Copyright 2018 The Grin Developers
+// Copyright 2019 The Libercoin Developers
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,10 +24,10 @@ use self::keychain::{ExtKeychain, ExtKeychainPath, Keychain};
 use self::util::RwLock;
 use chrono::Duration;
 use env_logger;
-use grin_chain as chain;
-use grin_core as core;
-use grin_keychain as keychain;
-use grin_util as util;
+use libercoin_chain as chain;
+use libercoin_core as core;
+use libercoin_keychain as keychain;
+use libercoin_util as util;
 use std::fs;
 use std::sync::Arc;
 
@@ -37,7 +38,7 @@ fn clean_output_dir(dir_name: &str) {
 #[test]
 fn test_coinbase_maturity() {
 	let _ = env_logger::init();
-	let chain_dir = ".grin_coinbase";
+	let chain_dir = ".libercoin_coinbase";
 	clean_output_dir(chain_dir);
 	global::set_mining_mode(ChainTypes::AutomatedTesting);
 
@@ -47,7 +48,7 @@ fn test_coinbase_maturity() {
 
 	{
 		let chain = chain::Chain::init(
-			".grin".to_string(),
+			".libercoin".to_string(),
 			Arc::new(NoopAdapter {}),
 			genesis_block,
 			pow::verify_size,

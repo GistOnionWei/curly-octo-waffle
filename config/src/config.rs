@@ -1,4 +1,5 @@
 // Copyright 2018 The Grin Developers
+// Copyright 2019 The Libercoin Developers
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,26 +35,26 @@ use crate::util::LoggingConfig;
 
 /// The default file name to use when trying to derive
 /// the node config file location
-pub const SERVER_CONFIG_FILE_NAME: &'static str = "grin-server.toml";
-const SERVER_LOG_FILE_NAME: &'static str = "grin-server.log";
-const GRIN_HOME: &'static str = ".grin";
-const GRIN_CHAIN_DIR: &'static str = "chain_data";
+pub const SERVER_CONFIG_FILE_NAME: &'static str = "libercoin-server.toml";
+const SERVER_LOG_FILE_NAME: &'static str = "libercoin-server.log";
+const LIBERCOIN_HOME: &'static str = ".libercoin";
+const LIBERCOIN_CHAIN_DIR: &'static str = "chain_data";
 /// Node API secret
 pub const API_SECRET_FILE_NAME: &'static str = ".api_secret";
 
-fn get_grin_path(chain_type: &global::ChainTypes) -> Result<PathBuf, ConfigError> {
-	// Check if grin dir exists
-	let mut grin_path = match dirs::home_dir() {
+fn get_libercoin_path(chain_type: &global::ChainTypes) -> Result<PathBuf, ConfigError> {
+	// Check if libercoin dir exists
+	let mut libercoin_path = match dirs::home_dir() {
 		Some(p) => p,
 		None => PathBuf::new(),
 	};
-	grin_path.push(GRIN_HOME);
-	grin_path.push(chain_type.shortname());
+	libercoin_path.push(LIBERCOIN_HOME);
+	libercoin_path.push(chain_type.shortname());
 	// Create if the default path doesn't exist
-	if !grin_path.exists() {
-		fs::create_dir_all(grin_path.clone())?;
+	if !libercoin_path.exists() {
+		fs::create_dir_all(libercoin_path.clone())?;
 	}
-	Ok(grin_path)
+	Ok(libercoin_path)
 }
 
 fn check_config_current_dir(path: &str) -> Option<PathBuf> {
@@ -97,8 +98,8 @@ pub fn check_api_secret(api_secret_path: &PathBuf) -> Result<(), ConfigError> {
 
 /// Check that the api secret file exists and is valid
 fn check_api_secret_file(chain_type: &global::ChainTypes) -> Result<(), ConfigError> {
-	let grin_path = get_grin_path(chain_type)?;
-	let mut api_secret_path = grin_path.clone();
+	let libercoin_path = get_libercoin_path(chain_type)?;
+	let mut api_secret_path = libercoin_path.clone();
 	api_secret_path.push(API_SECRET_FILE_NAME);
 	if !api_secret_path.exists() {
 		init_api_secret(&api_secret_path)
@@ -110,22 +111,22 @@ fn check_api_secret_file(chain_type: &global::ChainTypes) -> Result<(), ConfigEr
 /// Handles setup and detection of paths for node
 pub fn initial_setup_server(chain_type: &global::ChainTypes) -> Result<GlobalConfig, ConfigError> {
 	check_api_secret_file(chain_type)?;
-	// Use config file if current directory if it exists, .grin home otherwise
+	// Use config file if current directory if it exists, .libercoin home otherwise
 	if let Some(p) = check_config_current_dir(SERVER_CONFIG_FILE_NAME) {
 		GlobalConfig::new(p.to_str().unwrap())
 	} else {
-		// Check if grin dir exists
-		let grin_path = get_grin_path(chain_type)?;
+		// Check if libercoin dir exists
+		let libercoin_path = get_libercoin_path(chain_type)?;
 
 		// Get path to default config file
-		let mut config_path = grin_path.clone();
+		let mut config_path = libercoin_path.clone();
 		config_path.push(SERVER_CONFIG_FILE_NAME);
 
 		// Spit it out if it doesn't exist
 		if !config_path.exists() {
 			let mut default_config = GlobalConfig::for_chain(chain_type);
 			// update paths relative to current dir
-			default_config.update_paths(&grin_path);
+			default_config.update_paths(&libercoin_path);
 			default_config.write_to_file(config_path.to_str().unwrap())?;
 		}
 
@@ -244,16 +245,16 @@ impl GlobalConfig {
 	}
 
 	/// Update paths
-	pub fn update_paths(&mut self, grin_home: &PathBuf) {
+	pub fn update_paths(&mut self, libercoin_home: &PathBuf) {
 		// need to update server chain path
-		let mut chain_path = grin_home.clone();
-		chain_path.push(GRIN_CHAIN_DIR);
+		let mut chain_path = libercoin_home.clone();
+		chain_path.push(LIBERCOIN_CHAIN_DIR);
 		self.members.as_mut().unwrap().server.db_root = chain_path.to_str().unwrap().to_owned();
-		let mut secret_path = grin_home.clone();
+		let mut secret_path = libercoin_home.clone();
 		secret_path.push(API_SECRET_FILE_NAME);
 		self.members.as_mut().unwrap().server.api_secret_path =
 			Some(secret_path.to_str().unwrap().to_owned());
-		let mut log_path = grin_home.clone();
+		let mut log_path = libercoin_home.clone();
 		log_path.push(SERVER_LOG_FILE_NAME);
 		self.members
 			.as_mut()

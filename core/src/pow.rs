@@ -1,4 +1,5 @@
 // Copyright 2018 The Grin Developers
+// Copyright 2019 The Libercoin Developers
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -73,7 +74,6 @@ pub fn verify_size(bh: &BlockHeader) -> Result<(), Error> {
 pub fn mine_genesis_block() -> Result<Block, Error> {
 	let mut gen = genesis::genesis_dev();
 	if global::is_user_testing_mode() || global::is_automated_testing_mode() {
-		gen = genesis::genesis_dev();
 		gen.header.timestamp = Utc::now();
 	}
 

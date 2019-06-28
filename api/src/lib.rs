@@ -1,4 +1,5 @@
 // Copyright 2018 The Grin Developers
+// Copyright 2019 The Libercoin Developers
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,12 +13,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use grin_chain as chain;
-use grin_core as core;
-use grin_p2p as p2p;
-use grin_pool as pool;
+use libercoin_chain as chain;
+use libercoin_core as core;
+use libercoin_p2p as p2p;
+use libercoin_pool as pool;
 
-use grin_util as util;
+use libercoin_util as util;
 
 use failure;
 #[macro_use]
@@ -39,7 +40,7 @@ mod rest;
 mod router;
 mod types;
 
-pub use crate::auth::{BasicAuthMiddleware, GRIN_BASIC_REALM};
+pub use crate::auth::{BasicAuthMiddleware, LIBERCOIN_BASIC_REALM};
 pub use crate::handlers::start_rest_apis;
 pub use crate::rest::*;
 pub use crate::router::*;

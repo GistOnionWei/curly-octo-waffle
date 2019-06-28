@@ -1,4 +1,5 @@
 // Copyright 2018 The Grin Developers
+// Copyright 2019 The Libercoin Developers
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//! Grin server implementation, glues the different parts of the system (mostly
+//! Libercoin server implementation, glues the different parts of the system (mostly
 //! the peer-to-peer server, the blockchain and the transaction pool) and acts
 //! as a facade.
 
@@ -40,7 +41,7 @@ use crate::common::types::{Error, ServerConfig, StratumServerConfig, SyncState, 
 use crate::core::core::hash::{Hashed, ZERO_HASH};
 use crate::core::core::verifier_cache::{LruVerifierCache, VerifierCache};
 use crate::core::{consensus, genesis, global, pow};
-use crate::grin::{dandelion_monitor, seed, sync};
+use crate::libercoin::{dandelion_monitor, seed, sync};
 use crate::mining::stratumserver;
 use crate::mining::test_miner::Miner;
 use crate::p2p;
@@ -49,7 +50,7 @@ use crate::pool;
 use crate::util::file::get_first_line;
 use crate::util::{RwLock, StopState};
 
-/// Grin server holding internal structures.
+/// Libercoin server holding internal structures.
 pub struct Server {
 	/// server config
 	pub config: ServerConfig,
@@ -68,7 +69,7 @@ pub struct Server {
 	state_info: ServerStateInfo,
 	/// Stop flag
 	pub stop_state: Arc<StopState>,
-	/// Maintain a lock_file so we do not run multiple Grin nodes from same dir.
+	/// Maintain a lock_file so we do not run multiple Libercoin nodes from same dir.
 	lock_file: Arc<File>,
 	connect_thread: Option<JoinHandle<()>>,
 	sync_thread: JoinHandle<()>,
@@ -112,12 +113,12 @@ impl Server {
 	}
 
 	// Exclusive (advisory) lock_file to ensure we do not run multiple
-	// instance of grin server from the same dir.
+	// instance of libercoin server from the same dir.
 	// This uses fs2 and should be safe cross-platform unless somebody abuses the file itself.
-	fn one_grin_at_a_time(config: &ServerConfig) -> Result<Arc<File>, Error> {
+	fn one_libercoin_at_a_time(config: &ServerConfig) -> Result<Arc<File>, Error> {
 		let path = Path::new(&config.db_root);
 		fs::create_dir_all(path.clone())?;
-		let path = path.join("grin.lock");
+		let path = path.join("libercoin.lock");
 		let lock_file = fs::OpenOptions::new()
 			.read(true)
 			.write(true)
@@ -127,7 +128,7 @@ impl Server {
 			let mut stderr = std::io::stderr();
 			writeln!(
 				&mut stderr,
-				"Failed to lock {:?} (grin server already running?)",
+				"Failed to lock {:?} (libercoin server already running?)",
 				path
 			)
 			.expect("Could not write to stderr");
@@ -139,7 +140,7 @@ impl Server {
 	/// Instantiates a new server associated with the provided future reactor.
 	pub fn new(config: ServerConfig) -> Result<Server, Error> {
 		// Obtain our lock_file or fail immediately with an error.
-		let lock_file = Server::one_grin_at_a_time(&config)?;
+		let lock_file = Server::one_libercoin_at_a_time(&config)?;
 
 		// Defaults to None (optional) in config file.
 		// This translates to false here.
@@ -299,7 +300,7 @@ impl Server {
 			stop_state.clone(),
 		)?;
 
-		warn!("Grin server started.");
+		warn!("Libercoin server started.");
 		Ok(Server {
 			config,
 			p2p: p2p_server,

@@ -1,4 +1,5 @@
 // Copyright 2018 The Grin Developers
+// Copyright 2019 The Libercoin Developers
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,10 +13,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use grin_chain as chain;
-use grin_core as core;
+use libercoin_chain as chain;
+use libercoin_core as core;
 
-use grin_util as util;
+use libercoin_util as util;
 
 use std::collections::HashSet;
 use std::fs::{self, File, OpenOptions};
@@ -27,7 +28,7 @@ use crate::chain::store::ChainStore;
 use crate::chain::txhashset;
 use crate::core::core::BlockHeader;
 use crate::util::file;
-use grin_core::core::hash::Hashed;
+use libercoin_core::core::hash::Hashed;
 
 fn clean_output_dir(dir_name: &str) {
 	let _ = fs::remove_dir_all(dir_name);
@@ -35,7 +36,7 @@ fn clean_output_dir(dir_name: &str) {
 
 #[test]
 fn test_unexpected_zip() {
-	let db_root = format!(".grin_txhashset_zip");
+	let db_root = format!(".libercoin_txhashset_zip");
 	clean_output_dir(&db_root);
 	{
 		let chain_store = ChainStore::new(&db_root).unwrap();
