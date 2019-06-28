@@ -162,35 +162,48 @@ impl GlobalConfig {
 		defaults.chain_type = chain_type.clone();
 
 		match *chain_type {
-			global::ChainTypes::Mainnet => {}
+			global::ChainTypes::Mainnet => {
+				defaults.api_http_addr = "127.0.0.1:1773".to_owned();
+				defaults.p2p_config.port = 1776;
+				defaults
+					.stratum_mining_config
+					.as_mut()
+					.unwrap()
+					.stratum_server_addr = Some("127.0.0.1:1781".to_owned());
+				defaults
+					.stratum_mining_config
+					.as_mut()
+					.unwrap()
+					.wallet_listener_url = "http://127.0.0.1:1777".to_owned();
+			}
 			global::ChainTypes::Floonet => {
-				defaults.api_http_addr = "127.0.0.1:13413".to_owned();
-				defaults.p2p_config.port = 13414;
+				defaults.api_http_addr = "127.0.0.1:11773".to_owned();
+				defaults.p2p_config.port = 11776;
 				defaults
 					.stratum_mining_config
 					.as_mut()
 					.unwrap()
-					.stratum_server_addr = Some("127.0.0.1:13416".to_owned());
+					.stratum_server_addr = Some("127.0.0.1:11781".to_owned());
 				defaults
 					.stratum_mining_config
 					.as_mut()
 					.unwrap()
-					.wallet_listener_url = "http://127.0.0.1:13415".to_owned();
+					.wallet_listener_url = "http://127.0.0.1:11777".to_owned();
 			}
 			global::ChainTypes::UserTesting => {
-				defaults.api_http_addr = "127.0.0.1:23413".to_owned();
-				defaults.p2p_config.port = 23414;
+				defaults.api_http_addr = "127.0.0.1:21773".to_owned();
+				defaults.p2p_config.port = 21776;
 				defaults.p2p_config.seeding_type = p2p::Seeding::None;
 				defaults
 					.stratum_mining_config
 					.as_mut()
 					.unwrap()
-					.stratum_server_addr = Some("127.0.0.1:23416".to_owned());
+					.stratum_server_addr = Some("127.0.0.1:21781".to_owned());
 				defaults
 					.stratum_mining_config
 					.as_mut()
 					.unwrap()
-					.wallet_listener_url = "http://127.0.0.1:23415".to_owned();
+					.wallet_listener_url = "http://127.0.0.1:21777".to_owned();
 			}
 			global::ChainTypes::AutomatedTesting => {
 				panic!("Can't run automated testing directly");

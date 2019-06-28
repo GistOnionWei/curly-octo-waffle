@@ -20,7 +20,7 @@ use rand::{thread_rng, Rng};
 
 use crate::blake2::blake2b::blake2b;
 
-use crate::extkey_bip32::{BIP32GrinHasher, ExtendedPrivKey, ExtendedPubKey};
+use crate::extkey_bip32::{BIP32LibercoinHasher, ExtendedPrivKey, ExtendedPubKey};
 use crate::types::{
 	BlindSum, BlindingFactor, Error, ExtKeychainPath, Identifier, Keychain, SwitchCommitmentType,
 };
@@ -32,7 +32,7 @@ use crate::util::secp::{self, Message, Secp256k1, Signature};
 pub struct ExtKeychain {
 	secp: Secp256k1,
 	pub master: ExtendedPrivKey,
-	hasher: BIP32GrinHasher,
+	hasher: BIP32LibercoinHasher,
 }
 
 impl ExtKeychain {
@@ -40,7 +40,7 @@ impl ExtKeychain {
 		ExtendedPubKey::from_private(&self.secp, &self.master, &mut self.hasher)
 	}
 
-	pub fn hasher(&self) -> BIP32GrinHasher {
+	pub fn hasher(&self) -> BIP32LibercoinHasher {
 		self.hasher.clone()
 	}
 }

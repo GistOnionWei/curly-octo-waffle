@@ -16,7 +16,7 @@
 //! Rangeproof library functions
 
 use crate::blake2::blake2b::blake2b;
-use crate::keychain::extkey_bip32::BIP32GrinHasher;
+use crate::keychain::extkey_bip32::BIP32LibercoinHasher;
 use crate::keychain::{Identifier, Keychain, SwitchCommitmentType, ViewKey};
 use crate::libtx::error::{Error, ErrorKind};
 use crate::util::secp::key::SecretKey;
@@ -421,7 +421,7 @@ impl ProofBuild for ViewKey {
 		}
 
 		let mut key = self.clone();
-		let mut hasher = BIP32GrinHasher::new(self.is_floo);
+		let mut hasher = BIP32LibercoinHasher::new(self.is_floo);
 		for i in self.depth..path.depth {
 			let child_number = path.path[i as usize];
 			if child_number.is_hardened() {
